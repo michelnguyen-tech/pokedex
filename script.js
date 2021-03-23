@@ -1,8 +1,23 @@
 const poke_container = document.getElementById('poke-container')
 const pokemon_count = 29
 const colors = {
-    fire: '#FDDFDF'
+    fire: '#FDDFDF',
+    grass: '#DEFDE0',
+    electric: '#FCF7E0',
+    water: '#DEF3FD',
+    ground: '#f4e7da',
+    rock: '#d5d5d4',
+    fairy: '#fceaff',
+    poison: '#98d7e6',
+    bug: '#f8d5a3',
+    dragon: '#97b3e6',
+    psychic: '#eaeda1',
+    flying: '#F5F5F5',
+    fighting: '#E6E0D4',
+    normal: 'F5F5F5'
 }
+
+const main_types = Object.keys(colors);
 
 const fetchPokemons = async ()  => {
     for(let i = 1; i <= pokemon_count; i++ ) {
@@ -18,9 +33,19 @@ const getPokemon = async (id) => {
 }
 
 const createPokemonCard = (pokemon) => {
-    const pokemonEl = document.createElement('div')
+    const pokemonEl = document.createElement('div');
+    pokemonEl.classList.add('pokemon-card');
 
-    pokemonEl.classList.add('pokemon-card')
+    const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+
+    const id = pokemon.id.toString().padStart(3, '0')
+
+    const poke_types = pokemon.types.map(type => type.type.name);
+    const type = main_types.find(type => poke_types.indexOf(type) > -1);
+    
+    const color = colors[type];
+    pokemonEl.style.backgroundColor = color;
+
 
     const pokemonInnerHtml = `
     <div class="header-section">
