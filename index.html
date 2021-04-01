@@ -9,7 +9,14 @@
 </head>
 <body>
     <h1>Pokedex</h1>
-    <div class="poke-container" id="poke-container"></div>
+    <div class="page-container">
+        <div class="poke-container" id="poke-container">
+        </div>
+        <div class="slider-wrapper">
+            <label for="range" class="slider-label">100</label>
+            <input type="range" id="range" min="0" max="900" onmouseup="removeCardsElt();fetchPokemons()" >
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
