@@ -25,6 +25,8 @@ const fetchPokemons = async ()  => {
     }
 }
 
+const leftBtn = document.getElementById('left');
+const rightBtn = document.getElementById('right');
 const range = document.getElementById('range');
 
 range.addEventListener('input', (e) => {
@@ -47,6 +49,24 @@ range.addEventListener('input', (e) => {
     label.style.left = `${left}px`;
 
     label.innerHTML = value;
+})
+
+leftBtn.addEventListener('click', () => {
+    var value = document.getElementById('range').value;
+    const label = document.getElementById('slider-label');
+    if (value >= 1) {
+        document.getElementById('range').value = --value;
+        label.innerHTML = value;
+      }
+})
+
+rightBtn.addEventListener('click', () => {
+    var value = document.getElementById('range').value;
+    const label = document.getElementById('slider-label');
+    if (value < 900) {
+        document.getElementById('range').value = ++value;
+        label.innerHTML = value;
+      }
 })
 
 const scale = (num, in_min, in_max, out_min, out_max) => {
