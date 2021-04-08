@@ -20,9 +20,10 @@ const colors = {
 const main_types = Object.keys(colors);
 
 const fetchPokemons = async ()  => {
-    for(let i = pokemon_count-7; i <= pokemon_count; i++ ) {
-        await getPokemon(i)
-    }
+    //for(let i = pokemon_count-7; i <= pokemon_count; i++ ) {
+        //await getPokemon(i)
+    //}
+    await getPokemon(pokemon_count);
 }
 
 const leftBtn = document.getElementById('left');
@@ -52,20 +53,56 @@ range.addEventListener('input', (e) => {
 })
 
 leftBtn.addEventListener('click', () => {
-    var value = document.getElementById('range').value;
+    const e = document.getElementById('range');
+    var value = +e.value;
     const label = document.getElementById('slider-label');
-    if (value >= 1) {
+    
+    const range_width = getComputedStyle(e).getPropertyValue('width');
+
+    const label_width = getComputedStyle(label).getPropertyValue('width');
+
+    const num_width = +range_width.substring(0, range_width.length - 2);
+    const num_label_width = +label_width.substring(0, label_width.length - 2);
+
+    const max = +e.max;
+    const min = +e.min;
+
+    const left = ((value+48) * (num_width / max ) - num_label_width / 2 + scale((value+48), min, max, 10, -10));
+
+    label.style.left = `${left}px`;
+
+    if (value > 1) {
         document.getElementById('range').value = --value;
         label.innerHTML = value;
+        removeCardsElt();
+        getPokemon(value);
       }
 })
 
 rightBtn.addEventListener('click', () => {
-    var value = document.getElementById('range').value;
+    const e = document.getElementById('range');
+    var value = +e.value;
     const label = document.getElementById('slider-label');
-    if (value < 900) {
+
+    const range_width = getComputedStyle(e).getPropertyValue('width');
+
+    const label_width = getComputedStyle(label).getPropertyValue('width');
+
+    const num_width = +range_width.substring(0, range_width.length - 2);
+    const num_label_width = +label_width.substring(0, label_width.length - 2);
+
+    const max = +e.max;
+    const min = +e.min;
+
+    const left = ((value+48) * (num_width / max ) - num_label_width / 2 + scale((value+48), min, max, 10, -10));
+
+    label.style.left = `${left}px`;
+
+    if (value < 898) {
         document.getElementById('range').value = ++value;
         label.innerHTML = value;
+        removeCardsElt();
+        getPokemon(value);
       }
 })
 
@@ -129,4 +166,5 @@ function removeCardsElt() {
     }
   }
 
-fetchPokemons()
+//fetchPokemons()
+getPokemon(1);
