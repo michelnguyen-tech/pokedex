@@ -112,33 +112,50 @@ const scale = (num, in_min, in_max, out_min, out_max) => {
 
 const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-    const res = await fetch(url)
-    const data = await res.json()
-    createPokemonCard(data)
+    const url2 = `https://pokeapi.co/api/v2/pokemon-species/${id}`
+    const res = await Promise.all([
+        fetch(url),
+        fetch(url2)
+    ]).then(function (responses) {
+        // Get a JSON object from each of the responses
+        return Promise.all(responses.map(function (response) {
+            return response.json();
+        }));
+    }).then(function (data) {
+        // Log the data to the console
+        // You would do something with both sets of data here
+        createPokemonCard(data);
+    }).catch(function (error) {
+        // if there's an error, log it
+        console.log(error);
+    });
+
 }
 
 const createPokemonCard = (pokemon) => {
     const pokemonEl = document.createElement('div');
     pokemonEl.classList.add('pokemon-card');
 
-    const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+    const name = pokemon[0].name[0].toUpperCase() + pokemon[0].name.slice(1);
 
-    const id = pokemon.id.toString().padStart(3, '0')
+    const id = pokemon[0].id.toString().padStart(3, '0')
 
-    const poke_types = pokemon.types.map(type => type.type.name);
+    const poke_types = pokemon[0].types.map(type => type.type.name);
     const type = main_types.find(type => poke_types.indexOf(type) > -1);
     
     const color = colors[type];
     pokemonEl.style.backgroundColor = color;
 
+    const desc_test = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
+
 
     const pokemonInnerHtml = `
     <div class="header-section">
-        <small>${pokemon.name}</small>
-        <small>100HP</small>
+        <small>${pokemon[0].name}</small>
+        <small>${pokemon[0].stats[0].base_stat}HP</small>
     </div>
     <div class="img-container">
-        <img src="https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png" alt="">
+        <img src="https://pokeres.bastionbot.org/images/pokemon/${pokemon[0].id}.png" alt="">
     </div>
     <div class="dimension-section">
         <small>Seed pokemon. length:6'7, Weight: 221lbs</small>
@@ -149,7 +166,7 @@ const createPokemonCard = (pokemon) => {
     </div>
     <br>
     <div class=desc-section>
-        <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, saepe.</small>
+        <small>${desc_test}</small>
     </div>
     `
 
