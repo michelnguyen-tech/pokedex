@@ -124,12 +124,34 @@ const getPokemon = async (id) => {
     }).then(function (data) {
         // Log the data to the console
         // You would do something with both sets of data here
-        createPokemonCard(data);
+        return data;
     }).catch(function (error) {
         // if there's an error, log it
         console.log(error);
     });
 
+    getAbilities(res).then(([m1,m2]) => {
+      res.push(m1,m2);
+        createPokemonCard(res);
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+const getAbilities = async (data) => {
+    const url = [];
+
+    url.push(data[0].moves[0], data[0].moves[1]);
+
+    const[move1Res, move2Res] = await Promise.all([
+        fetch(url[0].move.url),
+        fetch(url[1].move.url)
+    ]);
+
+    const move1 = await move1Res.json();
+    const move2 = await move2Res.json();
+
+    return [move1,move2];
 }
 
 const createPokemonCard = (pokemon) => {
@@ -146,13 +168,16 @@ const createPokemonCard = (pokemon) => {
     const color = colors[type];
     pokemonEl.style.backgroundColor = color;
 
-    const desc_test = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
+    const desc_text = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
+
+    const abilities_text1 = pokemon[2].flavor_text_entries[0].flavor_text.replace(//g, ' ');
+    const abilities_text2 = pokemon[2].flavor_text_entries[1].flavor_text.replace(//g, ' ');
 
 
     const pokemonInnerHtml = `
     <div class="header-section">
-        <small>${pokemon[0].name}</small>
-        <small>${pokemon[0].stats[0].base_stat}HP</small>
+        <small><b>${pokemon[0].name}</b></small>
+        <small id="hptxt">${pokemon[0].stats[0].base_stat}HP</small>
     </div>
     <div class="img-container">
         <img src="https://pokeres.bastionbot.org/images/pokemon/${pokemon[0].id}.png" alt="">
@@ -162,11 +187,14 @@ const createPokemonCard = (pokemon) => {
     </div>
     <br>
     <div class=abilities-section>
-        <small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quae blanditiis nobis eum eaque qui sapiente. Cupiditate suscipit hic adipisci repudiandae, delectus consequatur! Beata</small>
+        <small><b>${pokemon[2].name} </b>${abilities_text1}</small>
+    </div>
+    <div class=abilities-section>
+        <small><b>${pokemon[3].name} </b>${abilities_text2}</small>
     </div>
     <br>
     <div class=desc-section>
-        <small>${desc_test}</small>
+        <small>${desc_text}</small>
     </div>
     `
 
@@ -183,5 +211,4 @@ function removeCardsElt() {
     }
   }
 
-//fetchPokemons()
 getPokemon(1);
