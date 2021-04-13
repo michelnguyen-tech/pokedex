@@ -170,7 +170,6 @@ const createPokemonCard = (pokemon) => {
     const type = main_types.find(type => poke_types.indexOf(type) > -1);
     
     const color = colors[type];
-    pokemonEl.style.backgroundColor = color;
 
     const desc_text = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
 
@@ -184,14 +183,15 @@ const createPokemonCard = (pokemon) => {
     
     const pokemon_type = pokemon[1].genera[7].genus;
 
-
+    //const test = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/240px-Pok%C3%A9mon_Poison_Type_Icon.svg.png"
     const pokemonInnerHtml = `
+    <div class="front" style="background-color:${color};">
     <div class="header-section">
         <b>${name}</b>
         <small id="hptxt">${pokemon[0].stats[0].base_stat}HP</small>
     </div>
     <div class="img-container">
-        <img src="https://pokeres.bastionbot.org/images/pokemon/${pokemon[0].id}.png" alt="">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon[0].id}.png" alt="">
     </div>
     <div class="dimension-section">
         <small>${pokemon_type}. length:${pokemon[0].height}, Weight:${pokemon[0].weight}</small>
@@ -206,6 +206,13 @@ const createPokemonCard = (pokemon) => {
     <br>
     <div class=desc-section>
         <small>${desc_text}</small>
+    </div>
+    </div>
+    
+    <div class="back">
+    <div class="header-section">
+        <b>test</b>
+    </div>
     </div>
     `
 
