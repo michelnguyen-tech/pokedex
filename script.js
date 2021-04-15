@@ -1,4 +1,4 @@
-const poke_container = document.getElementById('poke-container')
+const poke_container = document.getElementById('poke-container');
 var pokemon_count = 8;
 const colors = {
     fire: '#FDDFDF',
@@ -133,6 +133,7 @@ const getPokemon = async (id) => {
     getAbilities(res).then(([m1,m2]) => {
       res.push(m1,m2);
         createPokemonCard(res);
+        addPokemontype(res);
     }).catch(error => {
         console.log(error);
     });
@@ -186,39 +187,131 @@ const createPokemonCard = (pokemon) => {
     //const test = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/240px-Pok%C3%A9mon_Poison_Type_Icon.svg.png"
     const pokemonInnerHtml = `
     <div class="front" style="background-color:${color};">
-    <div class="header-section">
-        <b>${name}</b>
-        <small id="hptxt">${pokemon[0].stats[0].base_stat}HP</small>
+        <div class="header-section">
+           <b>${name}</b>
+           <small id="hptxt">${pokemon[0].stats[0].base_stat}HP</small>
+        </div>
+        <div class="img-container">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon[0].id}.png" alt="">
+        </div>
+        <div class="dimension-section">
+            <small>${pokemon_type}. length:${pokemon[0].height}, Weight:${pokemon[0].weight}</small>
+        </div>
+        <br>
+        <div class=abilities-section>
+            <small><b>${pokemon[2].name} </b>${(abilities_text1 === undefined) ? "unavailable" : abilities_text1}</small>
+        </div>
+        <div class=abilities-section>
+            <small><b>${pokemon[3].name} </b>${(abilities_text2 === undefined) ? "unavailable" : abilities_text2}</small>
+        </div>
+        <br>
+        <div class=desc-section>
+            <small>${desc_text}</small>
+        </div>
     </div>
-    <div class="img-container">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon[0].id}.png" alt="">
-    </div>
-    <div class="dimension-section">
-        <small>${pokemon_type}. length:${pokemon[0].height}, Weight:${pokemon[0].weight}</small>
-    </div>
-    <br>
-    <div class=abilities-section>
-        <small><b>${pokemon[2].name} </b>${(abilities_text1 === undefined) ? "unavailable" : abilities_text1}</small>
-    </div>
-    <div class=abilities-section>
-        <small><b>${pokemon[3].name} </b>${(abilities_text2 === undefined) ? "unavailable" : abilities_text2}</small>
-    </div>
-    <br>
-    <div class=desc-section>
-        <small>${desc_text}</small>
-    </div>
-    </div>
-    
-    <div class="back">
-    <div class="header-section">
-        <b>test</b>
-    </div>
+    <div class="back" style="background-color:${color};">
+        <div class="back-header-section">
+           <div><b>${name}</b></div> 
+           <div id="back-img"><img src="${pokemon[0].sprites.front_default}" alt="img" width="130px" height="130px"></div>
+        </div>
+        <br>
+        <div class="exp-section">
+            <small> exp: ${pokemon[0].base_experience}</small>
+        </div>
+        <br>
+        <div class="hp-section">
+            <small> hp: ${pokemon[0].stats[0].base_stat}</small>
+        </div>
+        <br>
+        <div class="attack-section">
+            <small> attack: ${pokemon[0].stats[1].base_stat}</small>
+        </div>
+        <br>
+        <div class="defence-section">
+            <small> defence: ${pokemon[0].stats[2].base_stat}</small>
+        </div>
+        <br>
+        <div class="spatt-section">
+            <small> special-attack: ${pokemon[0].stats[3].base_stat}</small>
+        </div>
+        <br>
+        <div class="spdef-section">
+            <small> special-defence: ${pokemon[0].stats[4].base_stat}</small>
+        </div>
+        <br>
+        <div class="speed-section">
+            <small> speed: ${pokemon[0].stats[5].base_stat}</small>
+        </div>
+        <br>
+        <div id="type-section">
+        </div>
+        <br>
+        <div id="ab-section">
+        </div>
     </div>
     `
 
     pokemonEl.innerHTML = pokemonInnerHtml
 
     poke_container.appendChild(pokemonEl)
+}
+
+
+const addPokemontype = (pokemon) => {
+    const colors = {
+        fire: '#EE8130',
+        grass: '#7AC74C',
+        electric: '#F7D02C',
+        water: '#6390F0',
+        ground: '#E2BF65',
+        rock: '#B6A136',
+        fairy: '#D685AD',
+        poison: '#A33EA1',
+        bug: '#A6B91A',
+        dragon: '#6F35FC',
+        psychic: '#F95587',
+        flying: '#A98FF3',
+        fighting: '#C22E28',
+        normal: 'A8A77A'
+    }
+
+    const poke_type_container = document.getElementById('type-section');
+    const pokemonTp = document.createElement('div');
+    pokemonTp.classList.add('pokemon-type');
+
+    const poke_abilities_container = document.getElementById('ab-section');
+    const pokemonAb = document.createElement('div');
+    pokemonAb.classList.add('pokemon-abilities');
+
+    const poke_types = pokemon[0].types.map(type => type.type.name);
+
+    for (i = 0; i < poke_types.length; i++) {
+        const type = poke_types[i];
+        const color = colors[type];
+        pokemonTp.innerHTML += `
+        <div class="chip" style="background-color:${color};>
+            <div class="chip__content">
+                <small>${type}</small>
+            </div>
+        </div>
+        `
+      }
+
+      const poke_abilities = pokemon[0].abilities.map(ab => ab.ability.name);
+
+    for (i = 0; i < poke_abilities.length; i++) {
+        const ab = poke_abilities[i];
+        pokemonAb.innerHTML += `
+        <div class="chip" style="background-color: #f2f2f2;>
+            <div class="chip__content">
+                <small>${ab}</small>
+            </div>
+        </div>
+        `
+    }
+
+    poke_type_container.appendChild(pokemonTp);
+    poke_abilities_container.appendChild(pokemonAb)
 }
 
 function removeCardsElt() {

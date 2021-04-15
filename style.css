@@ -35,6 +35,7 @@ body {
   margin: 10px;
   width: 320px;
   height: 440px;
+  cursor: pointer;
 }
 
 .front,
@@ -58,7 +59,13 @@ body {
 }
 
 .back {
+  border: 10px solid yellow;
   transform: perspective(600px) rotateY(180deg);
+  border-radius: 10px;
+  box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 .front .dimension-section {
@@ -98,8 +105,37 @@ body {
   justify-content: space-between;
 }
 
+.back-header-section {
+  display: flex;
+  flex-direction: row;
+}
+
+#back-img {
+  position: absolute;
+  top: 0;
+  right: 15px;
+}
+
 #hptxt {
   color: red;
+}
+
+.pokemon-type {
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-abilities {
+  display: flex;
+  flex-direction: row;
+}
+
+.chip {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  padding: 4px 8px;
+  width: fit-content;
+  margin-left: 5px;
 }
 
 .abilities-section {
