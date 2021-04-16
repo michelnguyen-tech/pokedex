@@ -19,9 +19,9 @@ const colors = {
 
 const main_types = Object.keys(colors);
 
-const fetchPokemons = async ()  => {
+const fetchPokemons = async () => {
     //for(let i = pokemon_count-7; i <= pokemon_count; i++ ) {
-        //await getPokemon(i)
+    //await getPokemon(i)
     //}
     await getPokemon(pokemon_count);
 }
@@ -32,7 +32,7 @@ const range = document.getElementById('range');
 
 range.addEventListener('input', (e) => {
     const value = +e.target.value;
-    const label = e.target.previousElementSibling ;
+    const label = e.target.previousElementSibling;
     pokemon_count = value;
 
     const range_width = getComputedStyle(e.target).getPropertyValue('width');
@@ -45,7 +45,7 @@ range.addEventListener('input', (e) => {
     const max = +e.target.max;
     const min = +e.target.min;
 
-    const left = ((value+48) * (num_width / max ) - num_label_width / 2 + scale((value+48), min, max, 10, -10));
+    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
 
     label.style.left = `${left}px`;
 
@@ -56,7 +56,7 @@ leftBtn.addEventListener('click', () => {
     const e = document.getElementById('range');
     var value = +e.value;
     const label = document.getElementById('slider-label');
-    
+
     const range_width = getComputedStyle(e).getPropertyValue('width');
 
     const label_width = getComputedStyle(label).getPropertyValue('width');
@@ -67,7 +67,7 @@ leftBtn.addEventListener('click', () => {
     const max = +e.max;
     const min = +e.min;
 
-    const left = ((value+48) * (num_width / max ) - num_label_width / 2 + scale((value+48), min, max, 10, -10));
+    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
 
     label.style.left = `${left}px`;
 
@@ -76,7 +76,7 @@ leftBtn.addEventListener('click', () => {
         label.innerHTML = value;
         removeCardsElt();
         getPokemon(value);
-      }
+    }
 })
 
 rightBtn.addEventListener('click', () => {
@@ -94,7 +94,7 @@ rightBtn.addEventListener('click', () => {
     const max = +e.max;
     const min = +e.min;
 
-    const left = ((value+48) * (num_width / max ) - num_label_width / 2 + scale((value+48), min, max, 10, -10));
+    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
 
     label.style.left = `${left}px`;
 
@@ -103,7 +103,7 @@ rightBtn.addEventListener('click', () => {
         label.innerHTML = value;
         removeCardsElt();
         getPokemon(value);
-      }
+    }
 })
 
 const scale = (num, in_min, in_max, out_min, out_max) => {
@@ -130,8 +130,8 @@ const getPokemon = async (id) => {
         console.log(error);
     });
 
-    getAbilities(res).then(([m1,m2]) => {
-      res.push(m1,m2);
+    getAbilities(res).then(([m1, m2]) => {
+        res.push(m1, m2);
         createPokemonCard(res);
         addPokemontype(res);
     }).catch(error => {
@@ -142,18 +142,18 @@ const getPokemon = async (id) => {
 const getAbilities = async (data) => {
     const url = [];
 
-    if (data[0].id<808) {
+    if (data[0].id < 808) {
         url.push(data[0].moves[0], data[0].moves[1]);
 
-        const[move1Res, move2Res] = await Promise.all([
+        const [move1Res, move2Res] = await Promise.all([
             fetch(url[0].move.url),
             fetch(url[1].move.url)
         ]);
-    
+
         const move1 = await move1Res.json();
         const move2 = await move2Res.json();
-    
-        return [move1,move2];  
+
+        return [move1, move2];
     }
 
     return [" ", " "];
@@ -169,7 +169,7 @@ const createPokemonCard = (pokemon) => {
 
     const poke_types = pokemon[0].types.map(type => type.type.name);
     const type = main_types.find(type => poke_types.indexOf(type) > -1);
-    
+
     const color = colors[type];
 
     const desc_text = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
@@ -181,7 +181,7 @@ const createPokemonCard = (pokemon) => {
         abilities_text1 = (pokemon[2].flavor_text_entries[0].flavor_text == undefined) ? " " : pokemon[2].flavor_text_entries[0].flavor_text.replace(//g, ' ');
         abilities_text2 = (pokemon[2].flavor_text_entries[1].flavor_text == undefined) ? " " : pokemon[2].flavor_text_entries[1].flavor_text.replace(//g, ' ');
     }
-    
+
     const pokemon_type = pokemon[1].genera[7].genus;
 
     //const test = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/240px-Pok%C3%A9mon_Poison_Type_Icon.svg.png"
@@ -215,32 +215,41 @@ const createPokemonCard = (pokemon) => {
            <div id="back-img"><img src="${pokemon[0].sprites.front_default}" alt="img" width="130px" height="130px"></div>
         </div>
         <br>
-        <div class="exp-section">
-            <small> exp: ${pokemon[0].base_experience}</small>
+        <div class="stat-section">
+            <small> hp: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[0].base_stat}</div>
+            </div>
         </div>
-        <br>
-        <div class="hp-section">
-            <small> hp: ${pokemon[0].stats[0].base_stat}</small>
+        <div class="stat-section">
+            <small> attack: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[1].base_stat}</div>
+            </div>
         </div>
-        <br>
-        <div class="attack-section">
-            <small> attack: ${pokemon[0].stats[1].base_stat}</small>
+        <div class="stat-section">
+            <small> defence: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[2].base_stat}</div>
+            </div>
         </div>
-        <br>
-        <div class="defence-section">
-            <small> defence: ${pokemon[0].stats[2].base_stat}</small>
+        <div class="stat-section">
+            <small> special-attack: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[3].base_stat}</div>
+            </div>
         </div>
-        <br>
-        <div class="spatt-section">
-            <small> special-attack: ${pokemon[0].stats[3].base_stat}</small>
+        <div class="stat-section">
+            <small> special-defence: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[4].base_stat}</div>
+            </div>
         </div>
-        <br>
-        <div class="spdef-section">
-            <small> special-defence: ${pokemon[0].stats[4].base_stat}</small>
-        </div>
-        <br>
-        <div class="speed-section">
-            <small> speed: ${pokemon[0].stats[5].base_stat}</small>
+        <div class="stat-section">
+            <small> speed: </small>
+            <div id="Progress_Status">
+                <div class="myprogressBar">${pokemon[0].stats[5].base_stat}</div>
+            </div>
         </div>
         <br>
         <div id="type-section">
@@ -295,9 +304,9 @@ const addPokemontype = (pokemon) => {
             </div>
         </div>
         `
-      }
+    }
 
-      const poke_abilities = pokemon[0].abilities.map(ab => ab.ability.name);
+    const poke_abilities = pokemon[0].abilities.map(ab => ab.ability.name);
 
     for (i = 0; i < poke_abilities.length; i++) {
         const ab = poke_abilities[i];
@@ -311,15 +320,23 @@ const addPokemontype = (pokemon) => {
     }
 
     poke_type_container.appendChild(pokemonTp);
-    poke_abilities_container.appendChild(pokemonAb)
+    poke_abilities_container.appendChild(pokemonAb);
+    
+    var elements = document.querySelectorAll(".myprogressBar");
+    for (var i = 0; i < elements.length; i++) {
+        var width = +elements[i].innerHTML;
+        elements[i].style.width = width/200*100 + '%';
+    }
+        
+  
 }
 
 function removeCardsElt() {
 
     var elements = document.getElementsByClassName("pokemon-card");
     while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
+        elements[0].parentNode.removeChild(elements[0]);
     }
-  }
+}
 
 getPokemon(1);

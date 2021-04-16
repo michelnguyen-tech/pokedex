@@ -113,7 +113,7 @@ body {
 #back-img {
   position: absolute;
   top: 0;
-  right: 15px;
+  right: 6px;
 }
 
 #hptxt {
@@ -140,6 +140,31 @@ body {
 
 .abilities-section {
   margin-bottom: 5px;
+}
+
+#Progress_Status {
+  width: 60%;
+  background-color: #ddd;
+  position: relative;
+}
+
+.myprogressBar {
+  width: 1%;
+  height: 15px;
+  background-color: #4caf50;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  margin: 0;
+}
+
+.stat-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#type-section {
+  margin-top: 55px;
 }
 
 .slider-container {
