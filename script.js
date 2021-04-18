@@ -172,16 +172,20 @@ const createPokemonCard = (pokemon) => {
 
     const color = colors[type];
 
-    const desc_text = pokemon[1].flavor_text_entries[0].flavor_text.replace(//g, ' ');
+    const dest_texts = pokemon[1].flavor_text_entries;
+    const ab_text_1 = pokemon[2].flavor_text_entries;
+    const ab_text_2 = pokemon[3].flavor_text_entries;
 
-    var abilities_text1 = "undefined";
-    var abilities_text2 = "undefined";
+    const desc_text = dest_texts.find( text => text.language.name == "en").flavor_text.replace(//g, ' ');
 
+    var abilities_text1 = "";
+    var abilities_text2 = "";
+    
     if (id < 808) {
-        abilities_text1 = (pokemon[2].flavor_text_entries[0].flavor_text == undefined) ? " " : pokemon[2].flavor_text_entries[0].flavor_text.replace(//g, ' ');
-        abilities_text2 = (pokemon[2].flavor_text_entries[1].flavor_text == undefined) ? " " : pokemon[2].flavor_text_entries[1].flavor_text.replace(//g, ' ');
+        abilities_text1 = ab_text_1.find( text => text.language.name == "en").flavor_text.replace(//g, ' ');
+        abilities_text2 = ab_text_2.find( text => text.language.name == "en").flavor_text.replace(//g, ' ');
     }
-
+   
     const pokemon_type = pokemon[1].genera[7].genus;
 
     //const test = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/240px-Pok%C3%A9mon_Poison_Type_Icon.svg.png"
@@ -327,8 +331,7 @@ const addPokemontype = (pokemon) => {
         var width = +elements[i].innerHTML;
         elements[i].style.width = width/200*100 + '%';
     }
-        
-  
+    handleToggle(document.getElementById("checkbox").checked == true); 
 }
 
 function removeCardsElt() {
@@ -336,6 +339,43 @@ function removeCardsElt() {
     var elements = document.getElementsByClassName("pokemon-card");
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
+    }
+}
+
+const checkbox = document.getElementById('checkbox');
+checkbox.addEventListener('change', function(event)  {
+    handleToggle(event.currentTarget.checked);
+});
+
+function handleToggle(isToggled) {
+    const element = document.getElementsByClassName('pokemon-card');
+    const frontcard = document.getElementsByClassName("front");
+    const backcard = document.getElementsByClassName("back");
+
+    if(isToggled) { 
+        frontcard[0].style.transform = "perspective(600px) rotateY(180deg)";
+        backcard[0].style.transform = "perspective(600px) rotateY(0deg)"
+
+        element[0].addEventListener("mouseenter", () => {
+            frontcard[0].style.transform = "perspective(600px) rotateY(0deg)";
+            backcard[0].style.transform = "perspective(600px) rotateY(-180deg)";
+        })
+        element[0].addEventListener("mouseleave", () => {
+            frontcard[0].style.transform = "perspective(600px) rotateY(180deg)";
+            backcard[0].style.transform = "perspective(600px) rotateY(0deg)";
+        })
+    } else {
+        frontcard[0].style.transform = "perspective(600px) rotateY(0deg)";
+        backcard[0].style.transform = "perspective(600px) rotateY(-180deg)";
+        
+        element[0].addEventListener("mouseenter", () => {
+            frontcard[0].style.transform = "perspective(600px) rotateY(180deg)";
+            backcard[0].style.transform = "perspective(600px) rotateY(0deg)";
+        })
+        element[0].addEventListener("mouseleave", () => {
+            frontcard[0].style.transform = "perspective(600px) rotateY(0deg)";
+            backcard[0].style.transform = "perspective(600px) rotateY(-180deg)";
+        })
     }
 }
 

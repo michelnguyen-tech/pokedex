@@ -92,14 +92,6 @@ body {
   max-width: 50%;
 }
 
-.pokemon-card:hover > .front {
-  transform: perspective(600px) rotateY(-180deg);
-}
-
-.pokemon-card:hover > .back {
-  transform: perspective(600px) rotateY(0deg);
-}
-
 .header-section {
   display: flex; /* or inline-flex */
   justify-content: space-between;
@@ -210,4 +202,63 @@ body {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-label {
+  background-color: gainsboro;
+  display: inline-block;
+  border-radius: 50px;
+  height: 26px;
+  width: 50px;
+  position: relative;
+}
+
+.ball {
+  background-color: white;
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  border-radius: 50%;
+  bottom: 1.8px;
+  left: 1px;
+  align-items: center;
+  justify-content: center;
+  animation: slideOff 0.3s linear forwards;
+}
+
+.checkbox:checked + .toggle-label .ball {
+  animation: slideOn 0.3s linear forwards;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox:checked + .toggle-label {
+  background-color: goldenrod;
+}
+
+@keyframes slideOn {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(10px) scale(1.2);
+  }
+  100% {
+    transform: translateX(25px) scale(1);
+  }
+}
+
+@keyframes slideOff {
+  0% {
+    transform: translateX(25px) scale(1);
+  }
+  50% {
+    transform: translateX(10px) scale(1.2);
+  }
+  100% {
+    transform: translateX(0) scale(1);
+  }
 }
