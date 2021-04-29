@@ -1,3 +1,70 @@
+const result = document.getElementById('result');
+const filter = document.getElementById('filter');
+const listItems = [];
+
+getData();
+
+filter.addEventListener('input', (e) => filterData(e.target.value));
+
+function getData() {
+    var myInit = { method:'GET',
+    headers: {
+        'Content-type': 'application/json'
+    },
+    mode:'cors',
+    cache: 'default' };
+
+    let request = new Request("./pokelist.json", myInit);
+
+    fetch(request)
+        .then(function(resp) {
+            return resp.json();
+        })
+        .then(function(data) {
+            var myData = Object.keys(data).map(key => {
+                return data[key];
+            })
+            myData.forEach(poke => {
+                const li = document.createElement('li');
+                listItems.push(li);
+
+                li.innerHTML = `
+                    <div class="poke-info">
+                        <h4>${poke.id}</h4> <p>${poke.name}</p>
+                    </div>
+                `
+
+                result.appendChild(li);
+            })
+        })
+}
+
+function filterData(searchTerm) {
+    listItems.forEach(item => {
+        if(item.innerText.toLowerCase().includes(searchTerm.toLowerCase())) {
+            item.classList.remove('hide');
+        } else {
+            item.classList.add('hide');
+        }
+    })
+}
+
+document.getElementById('result').addEventListener('click',function(e) {
+    var parent;
+    if(e.target.nodeName == "LI") {
+       var test = e.target.getElementsByTagName('div');
+       removeCardsElt();
+       getPokemon(test[0].firstElementChild.innerHTML);    
+    }
+    if(e.target.nodeName == "H4" || e.target.nodeName == "P"){
+        parent = e.target.parentElement;
+        removeCardsElt();
+        getPokemon(parent.firstElementChild.innerHTML);    
+    }
+    //removeCardsElt();
+    //getPokemon(parent.firstElementChild.innerHTML);    
+});
+
 const poke_container = document.getElementById('poke-container');
 var pokemon_count = 8;
 const colors = {

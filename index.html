@@ -19,19 +19,32 @@
         </label>
     </div>
     <div class="page-container">
-        <div class="poke-container" id="poke-container">
-        </div>
-        <div class="slider-container">
-            <button class="arrow left-arrow" id="left">
-                <i class="fas fa-arrow-left"></i>
-            </button>
-            <div class="slider-wrapper">
-                <label for="range" id="slider-label">1</label>
-                <input type="range" id="range" min="1" max="898" value="1" onmouseup="removeCardsElt();fetchPokemons()">
+        <div class="card-container">
+            <div class="poke-container" id="poke-container">
             </div>
-            <button class="arrow right-arrow" id="right">
-                <i class="fas fa-arrow-right"></i>
-            </button>
+            <div class="slider-container">
+                <button class="arrow left-arrow" id="left">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="slider-wrapper">
+                    <label for="range" id="slider-label">1</label>
+                    <input type="range" id="range" min="1" max="898" value="1" onmouseup="removeCardsElt();fetchPokemons()">
+                </div>
+                <button class="arrow right-arrow" id="right">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="pokelist-container">
+            <header class=pokelist-header>
+                <h4 class="pokelist-title">Pokemon List</h4>
+                <small class="pokelist-subtitle">search by name</small>
+                <input type="text" id="filter" placeholder="Search">
+            </header>
+
+            <ul id="result" class="poke-list">
+            </ul>
         </div>
     </div>
     <script src="script.js"></script>

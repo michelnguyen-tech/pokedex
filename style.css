@@ -13,7 +13,7 @@ body {
 
 .page-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .poke-container {
@@ -25,6 +25,11 @@ body {
   max-width: 1200px;
   min-height: 500px;
   min-width: 1200px;
+}
+
+.card-containter {
+  display: flex;
+  flex-direction: column;
 }
 
 .pokemon-card {
@@ -237,6 +242,68 @@ body {
 
 .checkbox:checked + .toggle-label {
   background-color: goldenrod;
+}
+
+.pokelist-container {
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 300px;
+}
+
+.pokelist-title {
+  margin: 0;
+}
+
+.pokelist-subtitle {
+  display: inline-block;
+  margin: 5px 0 20px;
+  opacity: 0.8;
+}
+
+.pokelist-header {
+  background-color: goldenrod;
+  color: #fff;
+  padding: 30px 20px;
+}
+
+.pokelist-header input {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 15px;
+  width: 100%;
+}
+
+.pokelist-header input:focus {
+  outline: none;
+}
+
+.poke-list {
+  background-color: #fff;
+  list-style-type: none;
+  margin: 0;
+  max-height: 400px;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.poke-list .poke-info h4 {
+  margin: 0 0 10px;
+}
+
+.poke-list .poke-info p {
+  font-size: 12px;
+}
+
+.poke-list li:not(:last-of-type) {
+  border-bottom: 1px solid #eee;
+}
+
+.poke-list li.hide {
+  display: none;
 }
 
 @keyframes slideOn {
