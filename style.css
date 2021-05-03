@@ -164,13 +164,6 @@ body {
   margin-top: 55px;
 }
 
-.slider-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-}
-
 .left-arrow {
   margin-top: 25px;
   margin-left: 15px;
@@ -179,34 +172,6 @@ body {
 .right-arrow {
   margin-top: 25px;
   margin-right: 15px;
-}
-
-.slider-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100px;
-  padding: 0;
-  position: relative;
-  margin-top: 30px;
-}
-
-.slider-wrapper input {
-  width: 90%;
-  margin: 18px 0;
-}
-
-#slider-label {
-  position: absolute;
-  padding: 5px 0;
-  width: 80px;
-  top: -1px;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .toggle-label {
@@ -277,6 +242,10 @@ body {
   width: 100%;
 }
 
+.pokelist-header input::placeholder {
+  color: #fff;
+}
+
 .pokelist-header input:focus {
   outline: none;
 }
@@ -291,11 +260,15 @@ body {
 }
 
 .poke-list .poke-info h4 {
-  margin: 0 0 10px;
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .poke-list .poke-info p {
   font-size: 12px;
+  margin: 0;
+  padding-bottom: 5px;
 }
 
 .poke-list li:not(:last-of-type) {
@@ -304,6 +277,10 @@ body {
 
 .poke-list li.hide {
   display: none;
+}
+
+#result li:hover {
+  background-color: rgb(240, 238, 238);
 }
 
 @keyframes slideOn {

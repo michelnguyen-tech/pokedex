@@ -33,7 +33,10 @@ function getData() {
                         <h4>${poke.id}</h4> <p>${poke.name}</p>
                     </div>
                 `
-
+                if(poke.id == 1) {
+                    li.style.backgroundColor = "rgb(240, 238, 238)";
+                    li.setAttribute("id", "focus"); 
+                }
                 result.appendChild(li);
             })
         })
@@ -50,19 +53,30 @@ function filterData(searchTerm) {
 }
 
 document.getElementById('result').addEventListener('click',function(e) {
-    var parent;
     if(e.target.nodeName == "LI") {
+        var list = document.getElementsByTagName("li");
+        for (let i = 0; i < list.length; i++) {
+            list[i].style.backgroundColor = "white";
+            list[i].removeAttribute('id');
+          }
        var test = e.target.getElementsByTagName('div');
        removeCardsElt();
-       getPokemon(test[0].firstElementChild.innerHTML);    
+       getPokemon(test[0].firstElementChild.innerHTML);
+       test[0].parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+       test[0].parentElement.setAttribute("id", "focus");  
     }
     if(e.target.nodeName == "H4" || e.target.nodeName == "P"){
-        parent = e.target.parentElement;
+        var list = document.getElementsByTagName("li");
+        for (let i = 0; i < list.length; i++) {
+            list[i].style.backgroundColor = "white";
+            list[i].removeAttribute('id');
+          }
+        var parent = e.target.parentElement;
         removeCardsElt();
-        getPokemon(parent.firstElementChild.innerHTML);    
-    }
-    //removeCardsElt();
-    //getPokemon(parent.firstElementChild.innerHTML);    
+        getPokemon(parent.firstElementChild.innerHTML);
+        e.target.parentElement.parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+        e.target.parentElement.parentElement.setAttribute("id", "focus");     
+    } 
 });
 
 const poke_container = document.getElementById('poke-container');
@@ -87,95 +101,49 @@ const colors = {
 const main_types = Object.keys(colors);
 
 const fetchPokemons = async () => {
-    //for(let i = pokemon_count-7; i <= pokemon_count; i++ ) {
-    //await getPokemon(i)
-    //}
     await getPokemon(pokemon_count);
 }
 
 const leftBtn = document.getElementById('left');
 const rightBtn = document.getElementById('right');
-const range = document.getElementById('range');
-
-range.addEventListener('input', (e) => {
-    const value = +e.target.value;
-    const label = e.target.previousElementSibling;
-    pokemon_count = value;
-
-    const range_width = getComputedStyle(e.target).getPropertyValue('width');
-
-    const label_width = getComputedStyle(label).getPropertyValue('width');
-
-    const num_width = +range_width.substring(0, range_width.length - 2);
-    const num_label_width = +label_width.substring(0, label_width.length - 2);
-
-    const max = +e.target.max;
-    const min = +e.target.min;
-
-    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
-
-    label.style.left = `${left}px`;
-
-    label.innerHTML = value;
-})
 
 leftBtn.addEventListener('click', () => {
-    const e = document.getElementById('range');
-    var value = +e.value;
-    const label = document.getElementById('slider-label');
-
-    const range_width = getComputedStyle(e).getPropertyValue('width');
-
-    const label_width = getComputedStyle(label).getPropertyValue('width');
-
-    const num_width = +range_width.substring(0, range_width.length - 2);
-    const num_label_width = +label_width.substring(0, label_width.length - 2);
-
-    const max = +e.max;
-    const min = +e.min;
-
-    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
-
-    label.style.left = `${left}px`;
+    var list = document.getElementsByTagName("li");
+    var value = +document.getElementById("focus").firstElementChild.getElementsByTagName('h4')[0].innerHTML;
 
     if (value > 1) {
-        document.getElementById('range').value = --value;
-        label.innerHTML = value;
+        for (let i = 0; i < list.length; i++) {
+            list[i].style.backgroundColor = "white";
+            list[i].removeAttribute('id');
+          }
+        value = --value;
+        list[value-1].setAttribute("id", "focus")
+        list[value-1].style.backgroundColor = "rgb(240, 238, 238)";
+        var elmnt = document.getElementById("focus");
+        elmnt.scrollIntoView();
         removeCardsElt();
         getPokemon(value);
     }
 })
 
 rightBtn.addEventListener('click', () => {
-    const e = document.getElementById('range');
-    var value = +e.value;
-    const label = document.getElementById('slider-label');
-
-    const range_width = getComputedStyle(e).getPropertyValue('width');
-
-    const label_width = getComputedStyle(label).getPropertyValue('width');
-
-    const num_width = +range_width.substring(0, range_width.length - 2);
-    const num_label_width = +label_width.substring(0, label_width.length - 2);
-
-    const max = +e.max;
-    const min = +e.min;
-
-    const left = ((value + 48) * (num_width / max) - num_label_width / 2 + scale((value + 48), min, max, 10, -10));
-
-    label.style.left = `${left}px`;
+    var list = document.getElementsByTagName("li");
+    var value = +document.getElementById("focus").firstElementChild.getElementsByTagName('h4')[0].innerHTML;
 
     if (value < 898) {
-        document.getElementById('range').value = ++value;
-        label.innerHTML = value;
+        for (let i = 0; i < list.length; i++) {
+            list[i].style.backgroundColor = "white";
+            list[i].removeAttribute('id');
+          }
+        value = ++value;
+        list[value-1].setAttribute("id", "focus")
+        list[value-1].style.backgroundColor = "rgb(240, 238, 238)";
+        var elmnt = document.getElementById("focus");
+        elmnt.scrollIntoView();
         removeCardsElt();
         getPokemon(value);
     }
 })
-
-const scale = (num, in_min, in_max, out_min, out_max) => {
-    return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
 
 const getPokemon = async (id) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${id}`
