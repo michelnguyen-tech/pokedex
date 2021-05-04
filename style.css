@@ -14,6 +14,7 @@ body {
 .page-container {
   display: flex;
   flex-direction: row;
+  margin-top: 25px;
 }
 
 .poke-container {
@@ -22,9 +23,7 @@ body {
   align-content: space-between;
   justify-content: center;
   margin: 0 auto;
-  max-width: 1200px;
-  min-height: 500px;
-  min-width: 1200px;
+  min-width: 500px;
 }
 
 .card-containter {
@@ -37,7 +36,7 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  margin: 10px;
+  margin: 0;
   width: 320px;
   height: 440px;
   cursor: pointer;
@@ -174,6 +173,10 @@ body {
   margin-right: 15px;
 }
 
+.toggle-container {
+  float: right;
+}
+
 .toggle-label {
   background-color: gainsboro;
   display: inline-block;
@@ -206,7 +209,7 @@ body {
 }
 
 .checkbox:checked + .toggle-label {
-  background-color: goldenrod;
+  background-color: rgb(224, 126, 14);
 }
 
 .pokelist-container {
@@ -214,6 +217,7 @@ body {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
+  height: 440px;
 }
 
 .pokelist-title {
@@ -254,7 +258,7 @@ body {
   background-color: #fff;
   list-style-type: none;
   margin: 0;
-  max-height: 400px;
+  max-height: 200px;
   padding: 0;
   overflow-y: auto;
 }

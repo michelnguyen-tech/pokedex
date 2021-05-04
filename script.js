@@ -53,30 +53,33 @@ function filterData(searchTerm) {
 }
 
 document.getElementById('result').addEventListener('click',function(e) {
-    if(e.target.nodeName == "LI") {
-        var list = document.getElementsByTagName("li");
-        for (let i = 0; i < list.length; i++) {
-            list[i].style.backgroundColor = "white";
-            list[i].removeAttribute('id');
-          }
-       var test = e.target.getElementsByTagName('div');
-       removeCardsElt();
-       getPokemon(test[0].firstElementChild.innerHTML);
-       test[0].parentElement.style.backgroundColor = "rgb(240, 238, 238)";
-       test[0].parentElement.setAttribute("id", "focus");  
-    }
-    if(e.target.nodeName == "H4" || e.target.nodeName == "P"){
-        var list = document.getElementsByTagName("li");
-        for (let i = 0; i < list.length; i++) {
-            list[i].style.backgroundColor = "white";
-            list[i].removeAttribute('id');
-          }
-        var parent = e.target.parentElement;
-        removeCardsElt();
-        getPokemon(parent.firstElementChild.innerHTML);
-        e.target.parentElement.parentElement.style.backgroundColor = "rgb(240, 238, 238)";
-        e.target.parentElement.parentElement.setAttribute("id", "focus");     
-    } 
+    setTimeout(function()
+    {
+        if(e.target.nodeName == "LI") {
+            var list = document.getElementsByTagName("li");
+            for (let i = 0; i < list.length; i++) {
+                list[i].style.backgroundColor = "white";
+                list[i].removeAttribute('id');
+              }
+           var test = e.target.getElementsByTagName('div');
+           removeCardsElt();
+           getPokemon(test[0].firstElementChild.innerHTML);
+           test[0].parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+           test[0].parentElement.setAttribute("id", "focus");  
+        }
+        if(e.target.nodeName == "H4" || e.target.nodeName == "P"){
+            var list = document.getElementsByTagName("li");
+            for (let i = 0; i < list.length; i++) {
+                list[i].style.backgroundColor = "white";
+                list[i].removeAttribute('id');
+              }
+            var parent = e.target.parentElement;
+            removeCardsElt();
+            getPokemon(parent.firstElementChild.innerHTML);
+            e.target.parentElement.parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+            e.target.parentElement.parentElement.setAttribute("id", "focus");     
+        } 
+    },300);
 });
 
 const poke_container = document.getElementById('poke-container');
@@ -108,6 +111,10 @@ const leftBtn = document.getElementById('left');
 const rightBtn = document.getElementById('right');
 
 leftBtn.addEventListener('click', () => {
+    leftBtn.disabled = true;
+    setTimeout(function(){leftBtn.disabled = false;},350);
+    filter.value = "";
+    filterData("");
     var list = document.getElementsByTagName("li");
     var value = +document.getElementById("focus").firstElementChild.getElementsByTagName('h4')[0].innerHTML;
 
@@ -127,6 +134,10 @@ leftBtn.addEventListener('click', () => {
 })
 
 rightBtn.addEventListener('click', () => {
+    rightBtn.disabled = true;
+    setTimeout(function(){rightBtn.disabled = false;},350);
+    filter.value = "";
+    filterData("");
     var list = document.getElementsByTagName("li");
     var value = +document.getElementById("focus").firstElementChild.getElementsByTagName('h4')[0].innerHTML;
 
