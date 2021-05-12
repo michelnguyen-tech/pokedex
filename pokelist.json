@@ -3558,5 +3558,37 @@
     "890": {
         "id": 890,
         "name": "Eternatus"
+    },
+    "891": {
+        "id": 891,
+        "name": "Kubfu"
+    },
+    "892": {
+        "id": 892,
+        "name": "Urshifu"
+    },
+    "893": {
+        "id": 893,
+        "name": "Zarude"
+    },
+    "894": {
+        "id": 894,
+        "name": "Regieleki"
+    },
+    "895": {
+        "id": 895,
+        "name": "Regidrado"
+    },
+    "896": {
+        "id": 896,
+        "name": "Glastrier"
+    },
+    "897": {
+        "id": 897,
+        "name": "Spectrier"
+    },
+    "898": {
+        "id": 898,
+        "name": "Calyrex"
     }
 }

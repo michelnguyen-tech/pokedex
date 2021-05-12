@@ -116,6 +116,14 @@ body {
   color: red;
 }
 
+#icon {
+  position: absolute;
+  top: 21px;
+  right: 6px;
+  width: 13px;
+  height: 13px;
+}
+
 .pokemon-type {
   display: flex;
   flex-direction: row;
