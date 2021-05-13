@@ -285,6 +285,10 @@ const createPokemonCard = (pokemon) => {
         <div class=desc-section>
             <small>${desc_text}</small>
         </div>
+        <br>
+        <div class=bottom-card-section>
+            <p><small><b>Illus. Mitsushira Arita</b> &copy1995, 96, 98 Nintendo, Creatures, GAMEFREAK, &copy1999 Wizards. </small></p>
+        </div>
     </div>
     <div class="back" style="background-color:${color};">
         <div class="back-header-section">
