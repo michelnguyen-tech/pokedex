@@ -92,10 +92,10 @@ const colors = {
     ground: '#f4e7da',
     rock: '#d5d5d4',
     fairy: '#fceaff',
-    poison: '#98d7e6',
+    poison: '#e2c5e2',
     bug: '#f8d5a3',
     dragon: '#97b3e6',
-    psychic: '#eaeda1',
+    psychic: '#c99ec2',
     flying: '#F5F5F5',
     fighting: '#E6E0D4',
     normal: 'F5F5F5',
@@ -262,9 +262,10 @@ const createPokemonCard = (pokemon) => {
     const pokemon_type = pokemon[1].genera[7].genus;
 
     const pokemonInnerHtml = `
-    <div class="front" style="background-color:${color};">
+    <div class="front" style="background-color:${color};">   
         <div class="header-section">
-           <b>${name}</b>
+           <small id="basic-text">Basic Pokemon</small>
+           <b id="pokemon-text">${name}</b>
            <small id="hptxt">${pokemon[0].stats[0].base_stat}HP 
            <img id="icon" src=${icon} alt=""></small>
         </div>
@@ -281,7 +282,6 @@ const createPokemonCard = (pokemon) => {
         <div class=abilities-section>
             <small><b>${pokemon[3].name} </b>${(abilities_text2 === undefined) ? "unavailable" : abilities_text2}</small>
         </div>
-        <br>
         <div class=desc-section>
             <small>${desc_text}</small>
         </div>

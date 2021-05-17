@@ -60,6 +60,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
   transform: perspective(600px) rotateY(0deg);
+  padding-top: 15px;
 }
 
 .back {
@@ -114,7 +115,13 @@ body {
   border-image-slice: 20;
   max-width: 225px;
   margin: auto;
+  margin-top: 10px;
   text-align: center;
+}
+
+.desc-section small {
+  font-size: 13px;
+  font-style: oblique;
 }
 
 .bottom-card-section {
@@ -139,16 +146,28 @@ body {
   right: 6px;
 }
 
+#basic-text {
+  position: absolute;
+  top: 6px;
+  font-size: 7px;
+}
+
+#pokemon-text {
+  font-size: 19px;
+}
+
 #hptxt {
   color: red;
+  padding-right: 23px;
+  font-size: 19px;
 }
 
 #icon {
   position: absolute;
-  top: 21px;
-  right: 6px;
-  width: 13px;
-  height: 13px;
+  top: 16px;
+  right: 23px;
+  width: 17px;
+  height: 17px;
 }
 
 .pokemon-type {
