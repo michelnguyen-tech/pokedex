@@ -349,20 +349,24 @@ const createPokemonCard = (pokemon) => {
 
 const addPokemontype = (pokemon) => {
     const colors = {
-        fire: '#EE8130',
-        grass: '#7AC74C',
+        fire: '#f12626',
+        grass: '#82f789',
         electric: '#F7D02C',
-        water: '#6390F0',
-        ground: '#E2BF65',
-        rock: '#B6A136',
-        fairy: '#D685AD',
-        poison: '#A33EA1',
-        bug: '#A6B91A',
-        dragon: '#6F35FC',
+        water: '#4abdf4',
+        ground: '#cc8f52',
+        rock: '#9b9b98',
+        fairy: '#eb74ff',
+        poison: '#b469b4',
+        bug: '#f8d5a3',
+        dragon: '#5885d7',
         psychic: '#F95587',
-        flying: '#A98FF3',
-        fighting: '#C22E28',
-        normal: 'A8A77A'
+        flying: '#a7a7a7',
+        fighting: '#ac9871',
+        normal: 'A8A77A',
+        steel: '#9595b8',
+        ghost: '#8f79b2',
+        dark: '#9e7e68',
+        ice: '#5fc2c2'
     }
 
     const poke_type_container = document.getElementById('type-section');
@@ -375,12 +379,19 @@ const addPokemontype = (pokemon) => {
 
     const poke_types = pokemon[0].types.map(type => type.type.name);
 
+    pokemonTp.innerHTML += `
+        <div class="type_text">
+            <small>Types: </small>     
+        </div>
+        `
+
     for (i = 0; i < poke_types.length; i++) {
         const type = poke_types[i];
         const color = colors[type];
         pokemonTp.innerHTML += `
         <div class="chip" style="background-color:${color};>
             <div class="chip__content">
+                <div class="hover_effect"></div>
                 <small>${type}</small>
             </div>
         </div>
@@ -389,11 +400,18 @@ const addPokemontype = (pokemon) => {
 
     const poke_abilities = pokemon[0].abilities.map(ab => ab.ability.name);
 
+    pokemonAb.innerHTML += `
+        <div class="ab_text">
+            <small>Abilities: </small>
+        </div>
+        `
+
     for (i = 0; i < poke_abilities.length; i++) {
         const ab = poke_abilities[i];
         pokemonAb.innerHTML += `
         <div class="chip" style="background-color: #f2f2f2;>
             <div class="chip__content">
+                <div class="hover_effect"></div>
                 <small>${ab}</small>
             </div>
         </div>
@@ -402,7 +420,20 @@ const addPokemontype = (pokemon) => {
 
     poke_type_container.appendChild(pokemonTp);
     poke_abilities_container.appendChild(pokemonAb);
-    
+
+    const chips = document.getElementsByClassName('chip');
+
+    for (var i = 0; i < chips.length; i++) {
+        chips[i].addEventListener("mouseenter", (e) => {
+            e.target.childNodes[1].style.transform = "rotate(-20deg) translateX(-118px)"
+            });
+
+            
+        chips[i].addEventListener("mouseleave", (e) => {
+            e.target.childNodes[1].style.transform = "";
+            });
+    }
+
     var elements = document.querySelectorAll(".myprogressBar");
     for (var i = 0; i < elements.length; i++) {
         var width = +elements[i].innerHTML;
@@ -416,6 +447,11 @@ function removeCardsElt() {
     var elements = document.getElementsByClassName("pokemon-card");
     while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
+    }
+
+    var chips = document.getElementsByClassName("chip");
+    while (chips.length > 0) {
+        chips[0].parentNode.removeChild(chips[0]);
     }
 }
 
