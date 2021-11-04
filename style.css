@@ -7,8 +7,9 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100hv;
   margin: 0;
+  overflow: hidden;
+  background-color: #ff8b13;
 }
 
 .page-container {
@@ -23,19 +24,18 @@ body {
   align-content: space-between;
   justify-content: center;
   margin: 0 auto;
+  margin-left: 286px;
   min-width: 500px;
 }
 
-.card-containter {
-  display: flex;
-  flex-direction: column;
+.poke-logo {
+  width: 380px;
+  height: 190px;
+  margin-bottom: 55px;
+  margin-top: 20px;
 }
-
 .pokemon-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
   margin: 0;
   width: 320px;
   height: 440px;
@@ -61,6 +61,8 @@ body {
   box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
   transform: perspective(600px) rotateY(0deg);
   padding-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .back {
@@ -115,7 +117,6 @@ body {
   border-image-slice: 20;
   max-width: 225px;
   margin: auto;
-  margin-top: 10px;
   text-align: center;
 }
 
@@ -200,7 +201,7 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: -3px -3px 2px rgba(255, 255, 255, 0.3),
-    1px 1px 1px rgba(0, 0, 0.2), 2px 2px 2px rgba(0, 0, 0.2);
+    1px 1px 1px rgba(0, 0, 0.2), 1.5px 1.5px 1.5px rgba(0, 0, 0.2);
 }
 
 .hover_effect {
@@ -246,9 +247,19 @@ body {
   margin-top: 55px;
 }
 
+.arrow {
+  width: 40px;
+  height: 30px;
+}
+
+.fas {
+  color: #f00000;
+  font-weight: bold;
+}
+
 .left-arrow {
   margin-top: 25px;
-  margin-left: 15px;
+  margin-left: 3px;
 }
 
 .right-arrow {
@@ -335,6 +346,13 @@ body {
 
 .pokelist-header input:focus {
   outline: none;
+}
+
+.pokelist-footer {
+  background-color: #f00000;
+  border-radius: 0 0 5px 5px;
+  height: 42px;
+  z-index: 2000;
 }
 
 .poke-list {
