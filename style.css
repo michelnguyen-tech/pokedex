@@ -258,17 +258,18 @@ body {
 }
 
 .left-arrow {
-  margin-top: 25px;
+  margin-top: 18px;
   margin-left: 3px;
 }
 
 .right-arrow {
-  margin-top: 25px;
+  margin-top: 18px;
   margin-right: 15px;
 }
 
 .toggle-container {
   float: right;
+  margin-top: 15px;
 }
 
 .toggle-label {
@@ -303,7 +304,7 @@ body {
 }
 
 .checkbox:checked + .toggle-label {
-  background-color: rgb(160, 1, 1);
+  background-color: rgb(19 215 43);
 }
 
 .pokelist-container {
@@ -316,18 +317,47 @@ body {
 
 .pokelist-title {
   margin: 0;
+  margin-top: 20px;
 }
 
 .pokelist-subtitle {
   display: inline-block;
-  margin: 5px 0 20px;
+  margin: 5px 0 13px;
   opacity: 0.8;
 }
 
+.poke-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
 .pokelist-header {
+  position: absolute;
+  z-index: -2;
+  top: 25px;
+  width: 300px;
   background-color: #f00000;
   color: #fff;
-  padding: 30px 20px;
+  padding: 3px 20px;
+  height: 173px;
+}
+
+.pokedex-top {
+  background-color: #c70000;
+  height: 111px;
+  z-index: 56;
+  -webkit-clip-path: polygon(100% 0, 100% 23%, 67% 23%, 40% 37%, 0 37%, 0 0);
+  clip-path: polygon(100% 0, 100% 23%, 67% 23%, 40% 37%, 0 37%, 0 0);
+}
+
+.pokedex-top-2 {
+  background-color: #8f0000;
+  height: 111px;
+  z-index: -1;
+  -webkit-clip-path: polygon(100% 0, 100% 23%, 67% 23%, 40% 37%, 0 37%, 0 0);
+  clip-path: polygon(100% 0, 100% 23%, 67% 23%, 40% 37%, 0 37%, 0 0);
+  position: relative;
+  top: -109px;
 }
 
 .pokelist-header input {
@@ -353,15 +383,21 @@ body {
   border-radius: 0 0 5px 5px;
   height: 42px;
   z-index: 2000;
+  position: relative;
+  top: 178px;
 }
 
 .poke-list {
   background-color: #fff;
   list-style-type: none;
   margin: 0;
-  max-height: 200px;
+  max-height: 215px;
   padding: 0;
   overflow-y: auto;
+  top: 486px;
+  width: 300px;
+  z-index: 2000;
+  position: absolute;
 }
 
 .poke-list .poke-info h4 {
@@ -386,6 +422,16 @@ body {
 
 #result li:hover {
   background-color: rgb(240, 238, 238);
+}
+
+.poke-wrapper::before {
+  content: "";
+  background-color: rgb(240, 238, 238);
+  height: 200px;
+  width: 313px;
+  display: block;
+  position: absolute;
+  top: 199px;
 }
 
 @keyframes slideOn {
