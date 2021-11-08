@@ -360,6 +360,113 @@ body {
   top: -109px;
 }
 
+.pokedex-circle {
+  position: absolute;
+  background-color: white;
+  height: 27px;
+  width: 27px;
+  border-radius: 50%;
+  top: 7px;
+  left: 11px
+}
+
+.pokedex-circle::before {
+  content: "";
+  background-color: #59D4F0;
+  height: 21px;
+  width: 21px;
+  display: block;
+  position: absolute;
+  top: 7.9%;
+  left: 8%;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.pokedex-circle::after {
+  content: "";
+  background-color: #d7e6e6;
+  height: 4px;
+  width: 4px;
+  display: block;
+  position: absolute;
+  top: 34.5%;
+  left: 25%;
+  border-radius: 50%;
+  border: 1px solid #bed5d2;
+}
+
+.mini-circle-1 {
+  position: absolute;
+  background-color: #FE1A55;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 7px;
+  left: 44px;
+  border: 1.5px solid black;
+}
+
+.mini-circle-1::before {
+  content: "";
+  background-color: #ffffff;
+  height: 2px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  top: 35.5%;
+  left: 17%;
+  border-radius: 50%;
+}
+
+.mini-circle-2 {
+  position: absolute;
+  background-color: #F3EA60;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 7px;
+  left: 59px;
+  border: 1.5px solid black;
+}
+
+.mini-circle-2::before {
+  content: "";
+  background-color: #ffffff;
+  height: 2px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  top: 35.5%;
+  left: 17%;
+  border-radius: 50%;
+}
+
+.mini-circle-3 {
+  position: absolute;
+  background-color: #30F454;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 7px;
+  left: 74px;
+  border: 1.5px solid black;
+}
+
+.mini-circle-3::before {
+  content: "";
+  background-color: #ffffff;
+  height: 2px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  top: 35.5%;
+  left: 17%;
+  border-radius: 50%;
+}
+
+
+
 .pokelist-header input {
   background-color: rgba(0, 0, 0, 0.3);
   border: 0;
