@@ -34,7 +34,7 @@ function getData() {
                     </div>
                 `
                 if(poke.id == 1) {
-                    li.style.backgroundColor = "rgb(240, 238, 238)";
+                    li.style.backgroundColor = "rgb(211 211 211)";
                     li.setAttribute("id", "focus"); 
                 }
                 result.appendChild(li);
@@ -58,25 +58,25 @@ document.getElementById('result').addEventListener('click',function(e) {
         if(e.target.nodeName == "LI") {
             var list = document.getElementsByTagName("li");
             for (let i = 0; i < list.length; i++) {
-                list[i].style.backgroundColor = "white";
+                list[i].style.backgroundColor = "rgb(230 230 230)";
                 list[i].removeAttribute('id');
               }
            var test = e.target.getElementsByTagName('div');
            removeCardsElt();
            getPokemon(test[0].firstElementChild.innerHTML);
-           test[0].parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+           test[0].parentElement.style.backgroundColor = "rgb(211 211 211)";
            test[0].parentElement.setAttribute("id", "focus");  
         }
         if(e.target.nodeName == "H4" || e.target.nodeName == "P"){
             var list = document.getElementsByTagName("li");
             for (let i = 0; i < list.length; i++) {
-                list[i].style.backgroundColor = "white";
+                list[i].style.backgroundColor = "rgb(230 230 230)";
                 list[i].removeAttribute('id');
               }
             var parent = e.target.parentElement;
             removeCardsElt();
             getPokemon(parent.firstElementChild.innerHTML);
-            e.target.parentElement.parentElement.style.backgroundColor = "rgb(240, 238, 238)";
+            e.target.parentElement.parentElement.style.backgroundColor = "rgb(211 211 211)";
             e.target.parentElement.parentElement.setAttribute("id", "focus");     
         } 
     },300);
@@ -146,12 +146,12 @@ leftBtn.addEventListener('click', () => {
 
     if (value > 1) {
         for (let i = 0; i < list.length; i++) {
-            list[i].style.backgroundColor = "white";
+            list[i].style.backgroundColor = "rgb(230 230 230)";
             list[i].removeAttribute('id');
           }
         value = --value;
         list[value-1].setAttribute("id", "focus")
-        list[value-1].style.backgroundColor = "rgb(240, 238, 238)";
+        list[value-1].style.backgroundColor = "rgb(211 211 211)";
         var elmnt = document.getElementById("focus");
         elmnt.scrollIntoView();
         removeCardsElt();
@@ -169,12 +169,12 @@ rightBtn.addEventListener('click', () => {
 
     if (value < 898) {
         for (let i = 0; i < list.length; i++) {
-            list[i].style.backgroundColor = "white";
+            list[i].style.backgroundColor = "rgb(230 230 230)";
             list[i].removeAttribute('id');
           }
         value = ++value;
         list[value-1].setAttribute("id", "focus")
-        list[value-1].style.backgroundColor = "rgb(240, 238, 238)";
+        list[value-1].style.backgroundColor = "rgb(211 211 211)";
         var elmnt = document.getElementById("focus");
         elmnt.scrollIntoView();
         removeCardsElt();
